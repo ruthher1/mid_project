@@ -3,16 +3,15 @@ const Todo=require("../models/Todo")
 const addTodo=async (req,res)=>{
     const {title,tags}=req.body
     const tagsArr=tags.split(",")
-    const titleExists=await Todo.findOne({title:title}).lean()
-    if(titleExists)
-    {
-        return res.status(400).send("title is alredy exists")
-    
-    }
-
-     if(!title || !tags)
+    if(!title || !tags)
         {
-            return res.status(400).send("title is required")
+            return res.status(400).send("title and tags are required")
+        }
+        const titleExists=await Todo.findOne({title:title}).lean()
+        if(titleExists)
+        {
+            return res.status(400).send("title is alredy exists")
+        
         }
         const todo=await Todo.create({title,tags:tagsArr})
         const todos=await Todo.find().lean()

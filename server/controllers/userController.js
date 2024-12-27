@@ -4,16 +4,18 @@ const User=require("../models/User")
 const addUser=async (req,res)=>{
     const {name,username,email,address,phone}=req.body
 
-const usernameExists=await User.findOne({username:username}).lean()
-if(usernameExists)
-{
-    return res.status(400).send("username is alredy exists")
 
-}
-if(!name || !username || !email || !address)
+     if(!name || !username || !email || !address)
         {
-            return res.status(400).send("name is required")
+            return res.status(400).send("name and username and email and address are required")
         }
+        const usernameExists=await User.findOne({username:username}).lean()
+        if(usernameExists)
+        {
+            return res.status(400).send("username is alredy exists")
+        
+        }
+
         const user=await User.create({name,username,email,address,phone})
         const users=await User.find().lean()
         if(!users)
