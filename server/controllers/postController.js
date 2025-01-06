@@ -43,7 +43,7 @@ const getPosts=async (req,res)=>{
 const updatePost=async (req,res)=>{
     const {id,title,body}=req.body
     const titleExists=await Post.findOne({title:title}).lean()
-        if(titleExists&& titleExists._id!=id)
+        if(titleExists&& titleExists._id.toString()!=id)
         {
             console.log("title exists")
             return res.status(400).send("title is alredy exists")
