@@ -44,7 +44,7 @@ const getTodos=async (req,res)=>{
 const updateTodo=async (req,res)=>{
     const {id,title,tags,completed}=req.body
     const titleExists=await Todo.findOne({title:title}).lean()
-    if(titleExists&& titleExists._id!=id) {
+    if(titleExists&& titleExists._id.toString()!=id) {
         return res.status(400).send("title is alredy exists")
     
     }
