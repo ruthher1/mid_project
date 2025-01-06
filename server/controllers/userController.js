@@ -47,14 +47,14 @@ const getUsers=async (req,res)=>{
 const updateUser=async (req,res)=>{
     const {id,name,username,email,address,phone}=req.body
 const usernameExists=await User.findOne({username:username}).lean()
-if(usernameExists && usernameExists._id!=id)
+if(usernameExists && usernameExists._id.toString()!=id)
 {
     return res.status(400).send("username is alredy exists")
 
 }
-    if(!name||!id)
+    if(!name||!id||!username||!email||!address)
         {
-            return res.status(400).send("name and id are required")
+            return res.status(400).send("name username address email id are required")
         }
         
     const user=await User.findById(id).exec()
