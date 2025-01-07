@@ -16,13 +16,6 @@ const Home=()=>{
 
 
  const [value, setValue] = React.useState(0);
- const handleChange = (event, newValue) => {
-        setValue(newValue);
-        if(newValue===0)
-        {
-            return(<Users/>)
-        }
-   };
     
    const handleClickUser=()=>{
     navigate('/Users')
@@ -43,7 +36,6 @@ const Home=()=>{
           orientation="vertical"
           variant="scrollable"
           value={value}
-          onChange={handleChange}
           aria-label="Vertical tabs example"
           sx={{ borderRight: 1, borderColor: 'divider' }}
           >
